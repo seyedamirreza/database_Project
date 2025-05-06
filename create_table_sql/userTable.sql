@@ -1,0 +1,15 @@
+CREATE TABLE users (
+    id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    firstName NVARCHAR(255) NOT NULL,
+    lastName NVARCHAR(255) NOT NULL,
+    password NVARCHAR(255) NOT NULL,
+    phoneNumber NVARCHAR(255) NOT NULL UNIQUE,
+    role_id BIGINT NOT NULL,
+    registerDate DATE NOT NULL,
+    city NVARCHAR(255) NOT NULL,
+    email NVARCHAR(255) NULL,
+    accountState BIT NOT NULL,
+    created_at DATETIME2 NOT NULL DEFAULT GETDATE(),
+    updated_at DATETIME2 NOT NULL DEFAULT GETDATE(),
+    FOREIGN KEY (role_id) REFERENCES roles(id)
+);

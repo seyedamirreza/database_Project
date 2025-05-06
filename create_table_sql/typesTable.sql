@@ -1,0 +1,14 @@
+CREATE TABLE class_airs (
+    id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL
+);
+
+CREATE TABLE class_trains (
+    id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL
+);
+
+CREATE TABLE class_buses (
+    id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL
+);

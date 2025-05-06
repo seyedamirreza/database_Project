@@ -1,0 +1,4 @@
+CREATE TABLE type_vehicle (
+    id BIGINT IDENTITY(1,1) PRIMARY KEY,
+    name NVARCHAR(255) NOT NULL
+);
