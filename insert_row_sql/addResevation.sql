@@ -1,4 +1,4 @@
-INSERT INTO reservations (user_id, status, reserve_time, expire_time, created_at, updated_at) VALUES
+INSERT INTO reservations (ticket_id, status, reserve_time, expire_time, created_at, updated_at) VALUES
 (1, 1, '08:00:00', '10:00:00', GETDATE(), GETDATE()),
 (2, 1, '09:00:00', '11:00:00', GETDATE(), GETDATE()),
 (3, 1, '10:00:00', '12:00:00', GETDATE(), GETDATE()),

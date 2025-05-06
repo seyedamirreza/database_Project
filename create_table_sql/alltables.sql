@@ -62,12 +62,6 @@ CREATE TABLE flights (
     FOREIGN KEY (vehicle_id) REFERENCES vehicles(id),
     FOREIGN KEY (class_air_id) REFERENCES class_airs(id)
 );
-CREATE TABLE roles (
-    id BIGINT IDENTITY(1,1) PRIMARY KEY,
-    name NVARCHAR(255) NOT NULL,
-    created_at DATETIME2 NOT NULL DEFAULT GETDATE(),
-    updated_at DATETIME2 NOT NULL DEFAULT GETDATE()
-);
 
 
 CREATE TABLE users (
@@ -76,14 +70,14 @@ CREATE TABLE users (
     lastName NVARCHAR(255) NOT NULL,
     password NVARCHAR(255) NOT NULL,
     phoneNumber NVARCHAR(255) NOT NULL UNIQUE,
-    role_id BIGINT NOT NULL,
+    role NVARCHAR(255) NOT NULL,
     registerDate DATE NOT NULL,
     city NVARCHAR(255) NOT NULL,
     email NVARCHAR(255) NULL,
     accountState BIT NOT NULL,
     created_at DATETIME2 NOT NULL DEFAULT GETDATE(),
     updated_at DATETIME2 NOT NULL DEFAULT GETDATE(),
-    FOREIGN KEY (role_id) REFERENCES roles(id)
+   
 );
 CREATE TABLE tickets (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
@@ -102,12 +96,15 @@ CREATE TABLE tickets (
 CREATE TABLE reservations (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
     ticket_id BIGINT NOT NULL,
+    user_id BIGINT NOT NULL,
     status BIT NOT NULL,
     reserve_time TIME NOT NULL,
     expire_time TIME NOT NULL,
     created_at DATETIME2 NOT NULL DEFAULT GETDATE(),
     updated_at DATETIME2 NOT NULL DEFAULT GETDATE(),
-    FOREIGN KEY (ticket_id) REFERENCES tickets(id)
+    FOREIGN KEY (ticket_id) REFERENCES tickets(id),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+
 );
 
 CREATE TABLE payments (
@@ -132,6 +129,7 @@ CREATE TABLE wallets (
 CREATE TABLE reports (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
     reservation_id BIGINT NOT NULL,
+	status BIT NOT NULL,
     title NVARCHAR(255) NOT NULL,
     body NVARCHAR(MAX) NOT NULL,
     created_at DATETIME2 NOT NULL DEFAULT GETDATE(),
@@ -150,10 +148,12 @@ CREATE TABLE trains (
 CREATE TABLE ticket_reserve (
     id BIGINT IDENTITY(1,1) PRIMARY KEY,
     user_id BIGINT NOT NULL,
+    ticket_id BIGINT NOT NULL,
     reservation_id BIGINT NOT NULL,
     created_at DATETIME2 NOT NULL DEFAULT GETDATE(),
     updated_at DATETIME2 NOT NULL DEFAULT GETDATE(),
     FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (ticket_id) REFERENCES tickets(id),
     FOREIGN KEY (reservation_id) REFERENCES reservations(id)
 );
 
