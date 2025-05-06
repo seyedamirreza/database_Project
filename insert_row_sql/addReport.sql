@@ -1,0 +1,11 @@
+INSERT INTO reports (reservation_id, title, body, created_at, updated_at) VALUES
+(1, 'Report 1', 'Details of report 1', GETDATE(), GETDATE()),
+(2, 'Report 2', 'Details of report 2', GETDATE(), GETDATE()),
+(3, 'Report 3', 'Details of report 3', GETDATE(), GETDATE()),
+(4, 'Report 4', 'Details of report 4', GETDATE(), GETDATE()),
+(5, 'Report 5', 'Details of report 5', GETDATE(), GETDATE()),
+(6, 'Report 6', 'Details of report 6', GETDATE(), GETDATE()),
+(7, 'Report 7', 'Details of report 7', GETDATE(), GETDATE()),
+(8, 'Report 8', 'Details of report 8', GETDATE(), GETDATE()),
+(9, 'Report 9', 'Details of report 9', GETDATE(), GETDATE()),
+(10, 'Report 10', 'Details of report 10', GETDATE(), GETDATE());
