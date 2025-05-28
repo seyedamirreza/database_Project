@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Notifications\SendOTPViaBale;
 use Illuminate\Http\Request;
 use PDO;
 use Illuminate\Support\Facades\DB;
@@ -62,7 +64,37 @@ class UserController extends Controller
         $request->validate([
             'phoneNumber' => 'required|string',
         ]);
+        $password = $this->randomPasswordGenerator();
+        $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE phoneNumber = :phoneNumber LIMIT 1");
+        $stmt->bindValue(':phoneNumber', $request->phoneNumber);
+        $stmt->execute();
+
+        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        $user = null;
+        if ($data) {
+            $user = (new \App\Models\User())->newFromBuilder($data);
+        }else{
+            return response()->json([
+                'message' => 'User not found',
+            ]);
+        }
+//            dd($user);
+            $user->notify(new SendOTPViaBale($password));
+
+        return response()->json([
+            'message' => 'User created successfully',
+            ''
+        ], 201);
 
     }
+
+    private function randomPasswordGenerator()
+    {
+        return mt_rand(10000, 99999);
+    }
+
 
 }
