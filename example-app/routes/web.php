@@ -9,5 +9,5 @@ Route::get('/', function () {
 return view('welcome');
 });
 
-Route::post('/signup', [UserController::class, 'signup'])->withoutMiddleware([VerifyCsrfToken::class]);
-
+Route::post('/signUp', [UserController::class, 'signUp'])->withoutMiddleware([VerifyCsrfToken::class]);
+Route::post('/signIn', [UserController::class, 'signIn'])->withoutMiddleware([VerifyCsrfToken::class]);

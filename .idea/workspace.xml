@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/example-app/app/Providers/RouteServiceProvider.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example-app/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/database/migrations.zip" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/database/migrations.zip" afterDir="false" />
+    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="test first api for insert user in database">
       <change beforePath="$PROJECT_DIR$/example-app/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -213,11 +210,24 @@
       <updated>1748267146368</updated>
       <workItem from="1748267147929" duration="150000" />
       <workItem from="1748348809869" duration="2776000" />
-      <workItem from="1748430276261" duration="3886000" />
+      <workItem from="1748430276261" duration="4675000" />
     </task>
+    <task id="LOCAL-00001" summary="test first api for insert user in database">
+      <option name="closed" value="true" />
+      <created>1748438484685</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1748438484685</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test first api for insert user in database" />
+    <option name="LAST_COMMIT_MESSAGE" value="test first api for insert user in database" />
   </component>
 </project>

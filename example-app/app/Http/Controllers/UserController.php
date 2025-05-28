@@ -16,7 +16,7 @@ class UserController extends Controller
         return response()->json($data,200);
     }
 
-    public function signup(Request $request)
+    public function signUp(Request $request)
     {
         $request->validate([
             'firstName' => 'required|string',
@@ -57,4 +57,12 @@ class UserController extends Controller
 //            'token' => $token
         ], 201);
     }
+
+    public function signIn(Request $request){
+        $request->validate([
+            'phoneNumber' => 'required|string',
+        ]);
+
+    }
+
 }
