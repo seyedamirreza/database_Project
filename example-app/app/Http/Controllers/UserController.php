@@ -127,7 +127,93 @@ class UserController extends Controller
             }
         }
     }
+//    public function editUser(Request $request){
+//        $request->validate([
+//            'firstName' => 'required|string',
+//            'lastName' => 'required|string',
+//            'phoneNumber' => 'required|string|unique:users,phoneNumber',
+//            'password' => 'required|string|min:6',
+//            'city' => 'required|string',
+//            'email' => 'required|string|email',
+//        ]);
+//        $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+//
+//        $stmt = $pdo->prepare("SELECT * FROM users WHERE phoneNumber = :phoneNumber LIMIT 1");
+//        $stmt->bindValue(':phoneNumber', $request->phoneNumber);
+//        $stmt->execute();
+//
+//        $data = $stmt->fetch(PDO::FETCH_ASSOC);
+//
+//        $user = null;
+//        if ($data) {
+////            $user = (new \App\Models\User())->newFromBuilder($data);
+//
+//        }else{
+//            return response()->json([
+//                'message' => 'User not found',
+//            ]);
+//        }
+////        $user
+//
+//
+//    }
+
+    public function editUser(Request $request)
+    {
+        $request->validate([
+            'phoneNumber' => 'required|string', // از روی شماره کاربر رو پیدا می‌کنیم
+        ]);
+
+        try {
+            $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // آیا کاربر با این شماره وجود دارد؟
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE phoneNumber = ?");
+            $stmt->execute([$request->phoneNumber]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$user) {
+                return response()->json(['error' => 'User not found'], 404);
+            }
+
+            // لیست فیلدهایی که اجازه داریم آپدیت کنیم
+            $fields = ['firstName', 'lastName', 'password', 'city', 'email'];
+
+            $updateParts = [];
+            $bindings = [];
+
+            foreach ($fields as $field) {
+                if ($request->filled($field)) {
+                    if ($field === 'password') {
+                        $updateParts[] = "$field = :$field";
+                        $bindings[":$field"] = Hash::make($request->$field);
+                    } else {
+                        $updateParts[] = "$field = :$field";
+                        $bindings[":$field"] = $request->$field;
+                    }
+                }
+            }
+
+            if (empty($updateParts)) {
+                return response()->json(['message' => 'No valid fields provided'], 400);
+            }
+
+            $bindings[":phoneNumber"] = $request->phoneNumber;
+            $sql = "UPDATE users SET " . implode(', ', $updateParts) . " WHERE phoneNumber = :phoneNumber";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($bindings);
+
+            return response()->json(['message' => 'User updated successfully']);
+        } catch (\PDOException $e) {
+            return response()->json(['error' => 'Database error: ' . $e->getMessage()], 500);
+        }
+    }
+
+
 }
+
 
 
 
