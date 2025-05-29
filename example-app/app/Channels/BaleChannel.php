@@ -24,7 +24,7 @@ class BaleChannel
             return $response->json('access_token');
         });
 
-        Cache::put(((string)$notifiable->phoneNumber),$data['otp'], Carbon::now()->addSeconds(120));
+        Cache::put(((string)$notifiable->phoneNumber),$data['otp'], Carbon::now()->addSeconds(1200));
 
         Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
