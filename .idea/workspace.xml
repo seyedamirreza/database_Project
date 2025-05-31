@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="error for api 7 debuged">
+    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="show range for cancel ticket is ready">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example-app/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/routes/web.php" afterDir="false" />
@@ -212,7 +212,7 @@
       <workItem from="1748348809869" duration="2776000" />
       <workItem from="1748430276261" duration="7827000" />
       <workItem from="1748512258424" duration="8813000" />
-      <workItem from="1748691206990" duration="10266000" />
+      <workItem from="1748691206990" duration="12237000" />
     </task>
     <task id="LOCAL-00001" summary="test first api for insert user in database">
       <option name="closed" value="true" />
@@ -286,7 +286,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748704319937</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="show range for cancel ticket is ready">
+      <option name="closed" value="true" />
+      <created>1748705794458</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1748705794458</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -302,6 +310,7 @@
     <MESSAGE value="edit database" />
     <MESSAGE value="insert payment is ready" />
     <MESSAGE value="error for api 7 debuged" />
-    <option name="LAST_COMMIT_MESSAGE" value="error for api 7 debuged" />
+    <MESSAGE value="show range for cancel ticket is ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="show range for cancel ticket is ready" />
   </component>
 </project>

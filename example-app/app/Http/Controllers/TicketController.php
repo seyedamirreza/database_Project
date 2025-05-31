@@ -237,5 +237,53 @@ WHERE t.id = :id
 
     }
 
+    public function getTicketUserBooking(Request $request)
+    {
+//        dd($request->mood);
+        $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+        if ($request->mood == "booked") {
+            $sql2 = "SELECT t.*
+FROM payments p
+JOIN reservations r ON p.reservation_id = r.id
+JOIN tickets t ON r.ticket_id = t.id
+WHERE r.user_id = :user_id";
+
+            $stmt = $pdo->prepare($sql2);
+            $stmt->bindValue(':user_id', $request->user_id);
+            $stmt->execute();
+            $data1 = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (!$data1) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Ticket not found.'
+                ]);
+
+            } else {
+                return response()->json([
+                    'success' => true,
+                    'data' => $data1
+                ]);
+            }
+        }else if ($request->mood == "cancelled") {
+//            dd($request->mood);
+            $sql = "SELECT t.*
+        FROM reservations r
+        JOIN tickets t ON r.ticket_id = t.id
+        WHERE r.user_id = :user_id
+          AND r.status=0";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':user_id', $request->user_id);
+            $stmt->execute();
+            $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            dd($tickets);
+
+        }
+    }
+
+
+
+
 
 }
