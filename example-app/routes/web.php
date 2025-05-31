@@ -16,3 +16,6 @@ Route::post('/verifySignIn', [UserController::class, 'verifySignIn'])->withoutMi
 Route::put('/editUser', [UserController::class, 'editUser'])->withoutMiddleware([VerifyCsrfToken::class]);
 
 Route::get('/searchTicket',[TicketController::class, 'searchTicket']);
+Route::get('/getCityTicket',[TicketController::class, 'getCityTicket']);
+Route::get('/getdetailTicket',[TicketController::class, 'getdetailTicket']);
+

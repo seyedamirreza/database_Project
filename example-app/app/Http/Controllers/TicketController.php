@@ -104,4 +104,20 @@ JOIN type_vehicle ON vehicles.type_vehicle_id = type_vehicle.id
         return $tickets;
 
     }
+
+    public function getCityTicket(){
+  $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+        $data = $pdo->query("$sql = "
+    SELECT DISTINCT source AS city FROM tickets
+    UNION
+    SELECT DISTINCT destination AS city FROM tickets
+    ORDER BY city ASC
+";")
+            ->fetchAll(PDO::FETCH_ASSOC);
+         return response()->json($data,200);
+    }
+
+    public function getdetailTicket(){
+
+    }
 }
