@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="an error is corrected">
+    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="edit database">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/database/migrations/0000_05_03_101_create_reservations_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/database/migrations/0000_05_03_101_create_reservations_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example-app/database/migrations/0000_05_03_113005_create_payments_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/database/migrations/0000_05_03_113005_create_payments_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example-app/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -213,7 +212,7 @@
       <workItem from="1748348809869" duration="2776000" />
       <workItem from="1748430276261" duration="7827000" />
       <workItem from="1748512258424" duration="8813000" />
-      <workItem from="1748691206990" duration="5403000" />
+      <workItem from="1748691206990" duration="7769000" />
     </task>
     <task id="LOCAL-00001" summary="test first api for insert user in database">
       <option name="closed" value="true" />
@@ -263,7 +262,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748692673833</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="edit database">
+      <option name="closed" value="true" />
+      <created>1748700533917</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1748700533917</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -276,6 +283,7 @@
     <MESSAGE value="login with otp is compeleted" />
     <MESSAGE value="api for search is compeleted" />
     <MESSAGE value="an error is corrected" />
-    <option name="LAST_COMMIT_MESSAGE" value="an error is corrected" />
+    <MESSAGE value="edit database" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit database" />
   </component>
 </project>

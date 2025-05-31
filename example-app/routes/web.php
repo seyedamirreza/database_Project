@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\userController;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -21,3 +22,4 @@ Route::get('/getdetailTicket',[TicketController::class, 'getdetailTicket']);
 
 Route::post('/reserveTicket',[TicketController::class, 'reserveTicket'])->withoutMiddleware([VerifyCsrfToken::class]);
 
+Route::post('/createPayment',[PaymentController::class, 'createPayment'])->withoutMiddleware([VerifyCsrfToken::class]);

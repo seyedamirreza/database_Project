@@ -12,11 +12,11 @@ return new class extends Migration {
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+//            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('reservation_id');
-            $table->foreign('user_id')->references('id')->on('users');
+//            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('reservation_id')->references('id')->on('reservations');
-            $table->integer('price');
+//            $table->integer('price');
             $table->boolean('status');
             $table->string('payment_method');
             $table->time('time');
