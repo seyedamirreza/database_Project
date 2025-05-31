@@ -169,7 +169,7 @@ WHERE t.id = :id
         }
 
         $reserveTime = date('Y-m-d H:i:s');
-        $expireTime = date('Y-m-d H:i:s', strtotime('+10 minutes'));
+        $expireTime = date('Y-m-d H:i:s', strtotime('+1 minutes'));
 
         $stmt = $pdo->prepare("
         INSERT INTO reservations (user_id, ticket_id, status, reserve_time, expire_time, created_at, updated_at)
