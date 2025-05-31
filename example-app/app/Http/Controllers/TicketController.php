@@ -12,7 +12,6 @@ class TicketController extends Controller
     public function searchTicket(Request $request)
     {
 
-
 // فرض می‌کنیم مقادیر ورودی از $request یا هر ورودی دیگه به صورت امن وارد شدند
 
         $source = isset($request->source) ? $request->source : null;

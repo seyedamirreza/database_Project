@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="login with otp is compeleted">
+    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="api for search is compeleted">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +210,8 @@
       <workItem from="1748267147929" duration="150000" />
       <workItem from="1748348809869" duration="2776000" />
       <workItem from="1748430276261" duration="7827000" />
-      <workItem from="1748512258424" duration="7988000" />
+      <workItem from="1748512258424" duration="8813000" />
+      <workItem from="1748691206990" duration="650000" />
     </task>
     <task id="LOCAL-00001" summary="test first api for insert user in database">
       <option name="closed" value="true" />
@@ -245,7 +245,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748519560677</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="api for search is compeleted">
+      <option name="closed" value="true" />
+      <created>1748533741995</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1748533741995</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,6 +264,7 @@
     <MESSAGE value="notification channel for otp bale is created" />
     <MESSAGE value="send code in bale is compeleted" />
     <MESSAGE value="login with otp is compeleted" />
-    <option name="LAST_COMMIT_MESSAGE" value="login with otp is compeleted" />
+    <MESSAGE value="api for search is compeleted" />
+    <option name="LAST_COMMIT_MESSAGE" value="api for search is compeleted" />
   </component>
 </project>
