@@ -213,7 +213,29 @@ WHERE t.id = :id
         }
     }
 
+    public function showCancelValue(Request $request)
+    {
+        $request->validate([
+            'ticket_id' => 'required'
+        ]);
+        $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+        $sql2 = "SELECT t.price FROM tickets t WHERE id=:id";
 
+        $stmt = $pdo->prepare($sql2);
+        $stmt->bindValue(':id', $request->ticket_id);
+        $stmt->execute();
+
+        $data1 = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($data1) {
+            $price = $data1['price'];
+            return response()->json(['price for canceling is' => $price/10], 200);
+        } else {
+           return response()->json(['success' => false, 'message' => 'Ticket not found.']);
+        }
+//    dd($data1);
+
+    }
 
 
 }

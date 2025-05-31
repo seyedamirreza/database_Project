@@ -23,3 +23,5 @@ Route::get('/getdetailTicket',[TicketController::class, 'getdetailTicket']);
 Route::post('/reserveTicket',[TicketController::class, 'reserveTicket'])->withoutMiddleware([VerifyCsrfToken::class]);
 
 Route::post('/createPayment',[PaymentController::class, 'createPayment'])->withoutMiddleware([VerifyCsrfToken::class]);
+
+Route::post('/showCancelValue',[TicketController::class, 'showCancelValue'])->withoutMiddleware([VerifyCsrfToken::class]);
