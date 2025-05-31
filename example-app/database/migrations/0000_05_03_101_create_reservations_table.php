@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->boolean('status');
-            $table->time('reserve_time');
-            $table->time('expire_time');
+            $table->dateTime('reserve_time');
+            $table->dateTime('expire_time');
             $table->timestamps();
         });
     }

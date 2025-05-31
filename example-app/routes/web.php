@@ -19,3 +19,5 @@ Route::get('/searchTicket',[TicketController::class, 'searchTicket']);
 Route::get('/getCityTicket',[TicketController::class, 'getCityTicket']);
 Route::get('/getdetailTicket',[TicketController::class, 'getdetailTicket']);
 
+Route::post('/reserveTicket',[TicketController::class, 'reserveTicket'])->withoutMiddleware([VerifyCsrfToken::class]);
+
