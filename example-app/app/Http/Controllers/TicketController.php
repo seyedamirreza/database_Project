@@ -106,17 +106,114 @@ JOIN type_vehicle ON vehicles.type_vehicle_id = type_vehicle.id
 
     public function getCityTicket(){
   $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
-        $data = $pdo->query("$sql = "
+        $data = $pdo->query($sql = "
     SELECT DISTINCT source AS city FROM tickets
     UNION
     SELECT DISTINCT destination AS city FROM tickets
     ORDER BY city ASC
-";")
-            ->fetchAll(PDO::FETCH_ASSOC);
+")->fetchAll(PDO::FETCH_ASSOC);
          return response()->json($data,200);
     }
+    public function getdetailTicket(Request $request)
+    {
+        $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+        if (!isset($request->id)) {
+            return response()->json(['success' => false, 'message' => 'id ticket not found. ']);
+        } else {
+            $sql = "
+SELECT
+    t.id, t.source, t.destination, t.departure_time, t.arrival_time, t.price,
+    t.remaining_cap, t.class,
+    v.id AS vehicle_id, tv.name AS vehicle_type
+FROM tickets t
+JOIN vehicles v ON t.vehicle_id = v.id
+JOIN type_vehicle tv ON v.type_vehicle_id = tv.id
+WHERE t.id = :id
+";
+            $sql2 = "SELECT v.facilities
+FROM tickets t
+JOIN vehicles v ON t.vehicle_id = v.id
+WHERE t.id = :id
+";
 
-    public function getdetailTicket(){
+            $stmt = $pdo->prepare($sql2);
+            $stmt->bindValue(':id', $request->id);
+            $stmt->execute();
+            $data1 = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $request->id);
+            $stmt->execute();
+            $data = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            return response()->json(['ticket' => $data, 'vehicle_facilities' => $data1, 200]);
+        }
     }
+
+    public function reserveTicket(Request $request)
+    {
+        $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+
+        $this->cleanupExpiredReservations();
+        // ۲. ادامه منطق رزرو
+        $user_id = $request->input('user_id');
+        $ticket_id = $request->input('ticket_id');
+
+        $stmt = $pdo->prepare("SELECT remaining_cap FROM tickets WHERE id = ?");
+        $stmt->execute([$ticket_id]);
+        $ticket = $stmt->fetch(\PDO::FETCH_ASSOC);
+//        dd($ticket);
+
+        if (!$ticket || $ticket['remaining_cap'] < 1) {
+            return response()->json(['success' => false, 'message' => 'Ticket not available.']);
+        }
+
+        $reserveTime = date('Y-m-d H:i:s');
+        $expireTime = date('Y-m-d H:i:s', strtotime('+10 minutes'));
+
+        $stmt = $pdo->prepare("
+        INSERT INTO reservations (user_id, ticket_id, status, reserve_time, expire_time, created_at, updated_at)
+        VALUES (?, ?, true, ?, ?, NOW(), NOW())
+    ");
+        $stmt->execute([$user_id, $ticket_id, $reserveTime, $expireTime]);
+
+        $pdo->prepare("UPDATE tickets SET remaining_cap = remaining_cap - 1 WHERE id = ?")
+            ->execute([$ticket_id]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Reservation created successfully.',
+            'reserve_time' => $reserveTime,
+            'expire_time' => $expireTime
+        ]);
+    }
+
+    private function cleanupExpiredReservations()
+    {
+        $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+
+        $stmt = $pdo->prepare("
+        SELECT r.id, r.ticket_id
+        FROM reservations r
+        LEFT JOIN payments p ON p.reservation_id = r.id
+        WHERE r.status = true
+        AND r.expire_time <= NOW()
+        AND p.id IS NULL
+    ");
+        $stmt->execute();
+        $expired = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        // غیرفعال‌سازی و افزایش ظرفیت
+        foreach ($expired as $res) {
+            $pdo->prepare("UPDATE reservations SET status = false WHERE id = ?")
+                ->execute([$res['id']]);
+
+            $pdo->prepare("UPDATE tickets SET remaining_cap = remaining_cap + 1 WHERE id = ?")
+                ->execute([$res['ticket_id']]);
+        }
+    }
+
+
+
+
 }
