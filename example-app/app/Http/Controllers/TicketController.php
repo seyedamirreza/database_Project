@@ -283,11 +283,61 @@ WHERE r.user_id = :user_id";
     }
     public function cancelTicket(Request $request)
     {
-        
+        $reservationId = $request->input('reservation_id');
+
+        $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+
+
+        // گام 1: بررسی وجود رزرو
+        $stmt = $pdo->prepare("SELECT * FROM reservations WHERE id = ?");
+        $stmt->execute([$reservationId]);
+        $reservation = $stmt->fetch(\PDO::FETCH_ASSOC);
+//        dd($reservation['ticket_id']);
+        if (!$reservation) {
+            return response()->json(['success' => false, 'message' => 'Reservation not found.']);
+        }
+
+        if (!$reservation['status']) {
+            return response()->json(['success' => false, 'message' => 'Reservation already cancelled.']);
+        }
+
+        // گام 2: گرفتن مبلغ از جدول tickets
+        $stmt = $pdo->prepare("SELECT price, remaining_cap FROM tickets WHERE id = ?");
+        $stmt->execute([$reservation['ticket_id']]);
+        $ticket = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if (!$ticket) {
+            return response()->json(['success' => false, 'message' => 'Ticket not found.']);
+        }
+
+        $refundAmount = $ticket['price'];
+
+        // گام 3: بررسی وجود کیف پول برای کاربر
+        $stmt = $pdo->prepare("SELECT * FROM wallets WHERE user_id = ?");
+        $stmt->execute([$reservation['user_id']]);
+        $wallet = $stmt->fetch(\PDO::FETCH_ASSOC);
+
+        if ($wallet) {
+            // اگر کیف پول وجود داشت → افزایش اعتبار
+            $pdo->prepare("UPDATE wallets SET value = value + ? WHERE user_id = ?")
+                ->execute([$refundAmount, $reservation['user_id']]);
+        } else {
+            // اگر وجود نداشت → ایجاد و مقداردهی اولیه
+            $pdo->prepare("INSERT INTO wallets (user_id, value, created_at, updated_at)
+                       VALUES (?, ?, NOW(), NOW())")
+                ->execute([$reservation['user_id'], $refundAmount]);
+        }
+
+        // گام 4: تغییر وضعیت رزرو
+        $pdo->prepare("UPDATE reservations SET status = false, updated_at = NOW() WHERE id = ?")
+            ->execute([$reservationId]);
+
+        // گام 5: افزایش ظرفیت بلیط
+        $pdo->prepare("UPDATE tickets SET remaining_cap = remaining_cap + 1 WHERE id = ?")
+            ->execute([$reservation['ticket_id']]);
+
+        return response()->json(['success' => true, 'message' => 'Reservation cancelled and refund applied.']);
     }
-
-
-
 
 
 }
