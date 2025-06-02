@@ -6,6 +6,8 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Redis;
+
 
 class BaleChannel
 {
@@ -13,7 +15,7 @@ class BaleChannel
     {
         $data = $notification->toBale($notifiable);
 
-
+        // گرفتن توکن با cache (همچنان بمونه)
         $token = Cache::remember('tokenForOTP', now()->addSeconds((int)env('OTP_TIME_EXPIRATION')), function () {
             $response = Http::asForm()->post('http://safir.bale.ai/api/v2/auth/token', [
                 'grant_type' => 'client_credentials',
@@ -24,8 +26,10 @@ class BaleChannel
             return $response->json('access_token');
         });
 
-        Cache::put(((string)$notifiable->phoneNumber),$data['otp'], Carbon::now()->addSeconds(1200));
+        // ذخیره OTP در Redis با کلید شماره موبایل و زمان انقضا 20 دقیقه
+        Redis::setex((string)$notifiable->phoneNumber, 1200, $data['otp']);
 
+        // ارسال OTP به API Bale
         Http::withHeaders([
             'Authorization' => 'Bearer ' . $token,
         ])->post('https://safir.bale.ai/api/v2/send_otp', [
@@ -34,3 +38,5 @@ class BaleChannel
         ]);
     }
 }
+
+
