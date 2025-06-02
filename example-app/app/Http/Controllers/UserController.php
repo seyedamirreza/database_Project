@@ -106,8 +106,8 @@ class UserController extends Controller
         // cache pass is available
         $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
         $phone = $request->phoneNumber; // یا '9031104660' بسته به مقدار واقعی
-        $data = Redis::get('09123456789');
-
+        $data = Redis::get($phone);
+//dd($data,$request);
         if ((int)$request->code == $data) {
             $stmt = $pdo->prepare("SELECT * FROM users WHERE phoneNumber = :phoneNumber LIMIT 1");
             $stmt->bindValue(':phoneNumber', $request->phoneNumber);

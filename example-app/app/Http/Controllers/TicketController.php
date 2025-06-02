@@ -162,7 +162,7 @@ WHERE t.id = :id
         $stmt = $pdo->prepare("SELECT remaining_cap FROM tickets WHERE id = ?");
         $stmt->execute([$ticket_id]);
         $ticket = $stmt->fetch(\PDO::FETCH_ASSOC);
-//        dd($ticket);
+
 
         if (!$ticket || $ticket['remaining_cap'] < 1) {
             return response()->json(['success' => false, 'message' => 'Ticket not available.']);
@@ -277,7 +277,10 @@ WHERE r.user_id = :user_id";
             $stmt->execute();
             $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            dd($tickets);
+//            dd($tickets);
+            return response([
+                'data' => $tickets
+            ]);
 
         }
     }
