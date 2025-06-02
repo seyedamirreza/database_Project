@@ -281,6 +281,10 @@ WHERE r.user_id = :user_id";
 
         }
     }
+    public function cancelTicket(Request $request)
+    {
+        
+    }
 
 
 
