@@ -131,6 +131,7 @@
       <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/vlucas/phpdotenv" />
       <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/predis/predis" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

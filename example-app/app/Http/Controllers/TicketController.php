@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDO;
+use PDOException;
 
 class TicketController extends Controller
 {
@@ -104,16 +105,18 @@ JOIN type_vehicle ON vehicles.type_vehicle_id = type_vehicle.id
 
     }
 
-    public function getCityTicket(){
-  $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+    public function getCityTicket()
+    {
+        $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
         $data = $pdo->query($sql = "
     SELECT DISTINCT source AS city FROM tickets
     UNION
     SELECT DISTINCT destination AS city FROM tickets
     ORDER BY city ASC
 ")->fetchAll(PDO::FETCH_ASSOC);
-         return response()->json($data,200);
+        return response()->json($data, 200);
     }
+
     public function getdetailTicket(Request $request)
     {
         $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
@@ -229,9 +232,9 @@ WHERE t.id = :id
 
         if ($data1) {
             $price = $data1['price'];
-            return response()->json(['price for canceling is' => $price/10], 200);
+            return response()->json(['price for canceling is' => $price / 10], 200);
         } else {
-           return response()->json(['success' => false, 'message' => 'Ticket not found.']);
+            return response()->json(['success' => false, 'message' => 'Ticket not found.']);
         }
 //    dd($data1);
 
@@ -264,7 +267,7 @@ WHERE r.user_id = :user_id";
                     'data' => $data1
                 ]);
             }
-        }else if ($request->mood == "cancelled") {
+        } else if ($request->mood == "cancelled") {
 //            dd($request->mood);
             $sql = "SELECT t.*
         FROM reservations r
@@ -284,6 +287,7 @@ WHERE r.user_id = :user_id";
 
         }
     }
+
     public function cancelTicket(Request $request)
     {
         $reservationId = $request->input('reservation_id');
@@ -342,5 +346,53 @@ WHERE r.user_id = :user_id";
         return response()->json(['success' => true, 'message' => 'Reservation cancelled and refund applied.']);
     }
 
+    public function adminTicketManagement(Request $request)
+    {
+        $filter = $request->input('filter', 'all');
 
+        try {
+            $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            $sql = "
+            SELECT r.id AS reservation_id, r.user_id, r.ticket_id, r.status,
+                   t.source, t.destination, t.departure_time, t.arrival_time,
+                   p.amount AS payment_amount,
+                   rep.body AS report_reason
+            FROM reservations r
+            JOIN tickets t ON t.id = r.ticket_id
+            LEFT JOIN payments p ON p.reservation_id = r.id
+            LEFT JOIN reports rep ON rep.reservation_id = r.id
+        ";
+
+            // فیلترها
+            switch ($filter) {
+                case 'cancelled':
+                    $sql .= " WHERE r.status = 0";
+                    break;
+                case 'suspicious':
+                    $sql .= " WHERE (p.id IS NULL OR p.amount IS NULL) AND r.status = 1";
+                    break;
+                case 'reported':
+                    $sql .= " WHERE rep.id IS NOT NULL";
+                    break;
+                default:
+                    // همه موارد (فیلتر اعمال نمی‌شه)
+                    break;
+            }
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            if (count($reservations)) {
+                return response()->json(['success' => true, 'data' => $reservations]);
+            } else {
+                return response()->json(['success' => false, 'message' => 'رزروی یافت نشد.']);
+            }
+
+        } catch (PDOException $e) {
+            return response()->json(['success' => false, 'message' => 'خطا در اتصال به دیتابیس', 'error' => $e->getMessage()]);
+        }
+    }
 }

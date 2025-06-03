@@ -30,3 +30,5 @@ Route::get('/getTicketUserBooking',[TicketController::class, 'getTicketUserBooki
 
 Route::post('/cancelTicket',[TicketController::class, 'cancelTicket'])->withoutMiddleware([VerifyCsrfToken::class])->name('cancelTicket-api12');
 Route::post('/createReport',[ReportController::class, 'createReport'])->withoutMiddleware(VerifyCsrfToken::class)->name('createReport-api13');
+
+Route::get('/adminTicketManagement)',[TicketController::class, 'adminTicketManagement'])->name('adminTicketManagement-api10');

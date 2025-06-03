@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="api 11 is ready">
+    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="Add redis to notification channel">
+      <change beforePath="$PROJECT_DIR$/.idea/database_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/database_Project.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example-app/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/routes/web.php" afterDir="false" />
@@ -160,6 +162,7 @@
       <path value="$PROJECT_DIR$/example-app/vendor/tijsverkoyen/css-to-inline-styles" />
       <path value="$PROJECT_DIR$/example-app/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/example-app/vendor/voku/portable-ascii" />
+      <path value="$PROJECT_DIR$/example-app/vendor/predis/predis" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -184,7 +187,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Pest.Main">
+    <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner configuration_file="$PROJECT_DIR$/example-app/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
+      <method v="2" />
+    </configuration>
     <configuration name="Main" type="PestRunConfigurationType">
       <option name="pestRunnerSettings">
         <PestRunner configuration_file="$PROJECT_DIR$/example-app/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
@@ -216,7 +223,8 @@
       <workItem from="1748430276261" duration="7827000" />
       <workItem from="1748512258424" duration="8813000" />
       <workItem from="1748691206990" duration="12858000" />
-      <workItem from="1748865206753" duration="325000" />
+      <workItem from="1748865206753" duration="5958000" />
+      <workItem from="1748951467821" duration="881000" />
     </task>
     <task id="LOCAL-00001" summary="test first api for insert user in database">
       <option name="closed" value="true" />
@@ -306,7 +314,39 @@
       <option name="project" value="LOCAL" />
       <updated>1748711285686</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="api 13(insert report) is compeleted">
+      <option name="closed" value="true" />
+      <created>1748866863071</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1748866863071</updated>
+    </task>
+    <task id="LOCAL-00013" summary="api 12(cancel ticket) is compeleted">
+      <option name="closed" value="true" />
+      <created>1748867713777</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1748867713777</updated>
+    </task>
+    <task id="LOCAL-00014" summary="use redis to project">
+      <option name="closed" value="true" />
+      <created>1748868504235</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1748868504235</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Add redis to notification channel">
+      <option name="closed" value="true" />
+      <created>1748879053252</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1748879053252</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -324,6 +364,10 @@
     <MESSAGE value="error for api 7 debuged" />
     <MESSAGE value="show range for cancel ticket is ready" />
     <MESSAGE value="api 11 is ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="api 11 is ready" />
+    <MESSAGE value="api 13(insert report) is compeleted" />
+    <MESSAGE value="api 12(cancel ticket) is compeleted" />
+    <MESSAGE value="use redis to project" />
+    <MESSAGE value="Add redis to notification channel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add redis to notification channel" />
   </component>
 </project>
