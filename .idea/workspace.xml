@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="api 10(show cancelled ticket ) is ready">
-      <change beforePath="$PROJECT_DIR$/.idea/database_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/database_Project.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="add jwt to login user">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/app/Channels/BaleChannel.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Channels/BaleChannel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Http/Controllers/UserController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/composer.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +225,7 @@
       <workItem from="1748512258424" duration="8813000" />
       <workItem from="1748691206990" duration="12858000" />
       <workItem from="1748865206753" duration="5958000" />
-      <workItem from="1748951467821" duration="3728000" />
+      <workItem from="1748951467821" duration="5810000" />
     </task>
     <task id="LOCAL-00001" summary="test first api for insert user in database">
       <option name="closed" value="true" />
@@ -362,7 +355,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748952465125</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="add jwt to login user">
+      <option name="closed" value="true" />
+      <created>1748955592586</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1748955592586</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -385,6 +386,7 @@
     <MESSAGE value="use redis to project" />
     <MESSAGE value="Add redis to notification channel" />
     <MESSAGE value="api 10(show cancelled ticket ) is ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="api 10(show cancelled ticket ) is ready" />
+    <MESSAGE value="add jwt to login user" />
+    <option name="LAST_COMMIT_MESSAGE" value="add jwt to login user" />
   </component>
 </project>

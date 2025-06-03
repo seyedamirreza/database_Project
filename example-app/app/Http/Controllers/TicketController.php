@@ -10,102 +10,101 @@ use PDOException;
 class TicketController extends Controller
 {
 
-
     public function searchTicket(Request $request)
     {
+        $params = [
+            'source' => $request->source ?? null,
+            'destination' => $request->destination ?? null,
+            'departureDate' => $request->departureDate ?? null,
+            'vehicleType' => $request->vehicleType ?? null,
+            'priceMin' => isset($request->priceMin) ? (int)$request->priceMin : null,
+            'priceMax' => isset($request->priceMax) ? (int)$request->priceMax : null,
+            'companyId' => isset($request->companyId) ? (int)$request->companyId : null,
+            'departureTime' => $request->departureTime ?? null,
+            'class' => $request->class ?? null,
+        ];
 
-// فرض می‌کنیم مقادیر ورودی از $request یا هر ورودی دیگه به صورت امن وارد شدند
+        // ساختن کلید منحصر به‌فرد بر اساس پارامترها
+        $cacheKey = 'search_ticket:' . md5(json_encode($params));
 
-        $source = isset($request->source) ? $request->source : null;
-        $destination = isset($request->destination) ? $request->destination : null;
-        $departureDate = isset($request->departureDate) ? $request->departureDate : null; // تاریخ رفت
-        $vehicleType = isset($request->vehicleType) ? $request->vehicleType : null; // اسم نوع وسیله
-        $priceMin = isset($request->priceMin) ? (int)$request->priceMin : null;
-        $priceMax = isset($request->priceMax) ? (int)$request->priceMax : null;
-        $companyId = isset($request->companyId) ? (int)$request->companyId : null;
-        $departureTime = isset($request->departureTime) ? $request->departureTime : null; // مثلا '08:00:00'
-        $class = isset($request->class) ? $request->class : null;
+        // چک کردن کش در ردیس
+        $cachedResult = Redis::get($cacheKey);
+        if ($cachedResult)
+            return response()->json(['message'=>'ticket from redis is returned',
+                'data'=>$cachedResult], 200);
 
+        // ----------------- اجرای کوئری از دیتابیس -------------------
         $pdo = new PDO("mysql:host=localhost;dbname=example_app;charset=utf8", "root", "");
 
-// ساختن شرط ها و پارامترها داینامیک
         $where = [];
-        $params = [];
+        $pdoParams = [];
 
-// مبدا
-        if ($source) {
+        if ($params['source']) {
             $where[] = "tickets.source = :source";
-            $params[':source'] = $source;
+            $pdoParams[':source'] = $params['source'];
         }
 
-// مقصد
-        if ($destination) {
+        if ($params['destination']) {
             $where[] = "tickets.destination = :destination";
-            $params[':destination'] = $destination;
+            $pdoParams[':destination'] = $params['destination'];
         }
 
-// تاریخ رفت (می‌تونی این رو به departure_time مقایسه کنی)
-        if ($departureDate) {
+        if ($params['departureDate']) {
             $where[] = "tickets.departure_time = :departureDate";
-            $params[':departureDate'] = $departureDate;
+            $pdoParams[':departureDate'] = $params['departureDate'];
         }
 
-// نوع وسیله
-        if ($vehicleType) {
+        if ($params['vehicleType']) {
             $where[] = "type_vehicle.name = :vehicleType";
-            $params[':vehicleType'] = $vehicleType;
+            $pdoParams[':vehicleType'] = $params['vehicleType'];
         }
 
-// حداقل قیمت
-        if (!is_null($priceMin)) {
+        if (!is_null($params['priceMin'])) {
             $where[] = "tickets.price >= :priceMin";
-            $params[':priceMin'] = $priceMin;
+            $pdoParams[':priceMin'] = $params['priceMin'];
         }
 
-// حداکثر قیمت
-        if (!is_null($priceMax)) {
+        if (!is_null($params['priceMax'])) {
             $where[] = "tickets.price <= :priceMax";
-            $params[':priceMax'] = $priceMax;
+            $pdoParams[':priceMax'] = $params['priceMax'];
         }
 
-// شرکت حمل و نقل
-        if ($companyId) {
+        if ($params['companyId']) {
             $where[] = "vehicles.company_id = :companyId";
-            $params[':companyId'] = $companyId;
+            $pdoParams[':companyId'] = $params['companyId'];
         }
 
-// ساعت حرکت (می‌تونی با LIKE یا مقایسه زمانی کار کنی، اینجا فرض ساده می‌گیریم دقیقا ساعت معین)
-        if ($departureTime) {
+        if ($params['departureTime']) {
             $where[] = "TIME(tickets.departure_time) = :departureTime";
-            $params[':departureTime'] = $departureTime;
+            $pdoParams[':departureTime'] = $params['departureTime'];
         }
 
-// کلاس سفر
-        if ($class) {
+        if ($params['class']) {
             $where[] = "tickets.class = :class";
-            $params[':class'] = $class;
+            $pdoParams[':class'] = $params['class'];
         }
 
         $sql = "
-SELECT tickets.*, vehicles.name AS vehicle_name, type_vehicle.name AS vehicle_type_name, vehicles.company_id
-FROM tickets
-JOIN vehicles ON tickets.vehicle_id = vehicles.id
-JOIN type_vehicle ON vehicles.type_vehicle_id = type_vehicle.id
-";
+        SELECT tickets.*, vehicles.name AS vehicle_name, type_vehicle.name AS vehicle_type_name, vehicles.company_id
+        FROM tickets
+        JOIN vehicles ON tickets.vehicle_id = vehicles.id
+        JOIN type_vehicle ON vehicles.type_vehicle_id = type_vehicle.id
+    ";
 
         if (count($where) > 0) {
             $sql .= " WHERE " . implode(" AND ", $where);
         }
 
         $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
+        $stmt->execute($pdoParams);
 
         $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
-        return $tickets;
-
+        Redis::setex($cacheKey, 1800, json_encode($tickets));
+        return response()->json(['data'=>$tickets,'message'=>'this ticket are returned from database'], 200);
     }
+
 
     public function getCityTicket()
     {
