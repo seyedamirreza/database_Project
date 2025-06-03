@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 use PDO;
 use PDOException;
 
@@ -100,6 +101,7 @@ JOIN type_vehicle ON vehicles.type_vehicle_id = type_vehicle.id
         $stmt->execute($params);
 
         $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 
         return $tickets;
 

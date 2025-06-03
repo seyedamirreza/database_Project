@@ -4,12 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="Add redis to notification channel">
+    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="api 10(show cancelled ticket ) is ready">
       <change beforePath="$PROJECT_DIR$/.idea/database_Project.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/database_Project.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example-app/app/Channels/BaleChannel.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Channels/BaleChannel.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example-app/app/Http/Controllers/UserController.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Http/Controllers/UserController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example-app/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example-app/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example-app/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/composer.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,6 +167,10 @@
       <path value="$PROJECT_DIR$/example-app/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/example-app/vendor/voku/portable-ascii" />
       <path value="$PROJECT_DIR$/example-app/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/example-app/vendor/tymon/jwt-auth" />
+      <path value="$PROJECT_DIR$/example-app/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/example-app/vendor/lcobucci/clock" />
+      <path value="$PROJECT_DIR$/example-app/vendor/stella-maris/clock" />
     </include_path>
   </component>
   <component name="ProjectColorInfo">{
@@ -224,7 +232,7 @@
       <workItem from="1748512258424" duration="8813000" />
       <workItem from="1748691206990" duration="12858000" />
       <workItem from="1748865206753" duration="5958000" />
-      <workItem from="1748951467821" duration="881000" />
+      <workItem from="1748951467821" duration="3728000" />
     </task>
     <task id="LOCAL-00001" summary="test first api for insert user in database">
       <option name="closed" value="true" />
@@ -346,7 +354,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748879053252</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="api 10(show cancelled ticket ) is ready">
+      <option name="closed" value="true" />
+      <created>1748952465125</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1748952465125</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -368,6 +384,7 @@
     <MESSAGE value="api 12(cancel ticket) is compeleted" />
     <MESSAGE value="use redis to project" />
     <MESSAGE value="Add redis to notification channel" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add redis to notification channel" />
+    <MESSAGE value="api 10(show cancelled ticket ) is ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="api 10(show cancelled ticket ) is ready" />
   </component>
 </project>

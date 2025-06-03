@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 //use App\Models\Cache;
+use App\Models\User;
 use App\Notifications\SendOTPViaBale;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redis;
 use PDO;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 
 class UserController extends Controller
@@ -21,18 +23,32 @@ class UserController extends Controller
         return response()->json($data,200);
     }
 
+
+
     public function signUp(Request $request)
     {
         $request->validate([
             'firstName' => 'required|string',
             'lastName' => 'required|string',
-            'phoneNumber' => 'required|string|unique:users,phoneNumber',
+            'phoneNumber' => 'required|string',
             'password' => 'required|string|min:6',
             'city' => 'required|string',
         ]);
 
         $pdo = new PDO("mysql:host=localhost;dbname=example_app", "root", "");
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+        // ⛔ چک کردن شماره تکراری
+        $checkStmt = $pdo->prepare("SELECT id FROM users WHERE phoneNumber = ?");
+        $checkStmt->execute([$request->phoneNumber]);
+        if ($checkStmt->fetch()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'این شماره تلفن قبلاً ثبت شده است.'
+            ], 409); // HTTP 409 Conflict
+        }
+
+        // ✅ ادامه ثبت نام
         $hashedPassword = Hash::make($request->password);
 
         $stmt = $pdo->prepare("INSERT INTO users (firstName, lastName, phoneNumber, password, city, role, accountState, registerDate)
@@ -43,25 +59,28 @@ class UserController extends Controller
         $stmt->bindValue(':phoneNumber', $request->phoneNumber);
         $stmt->bindValue(':password', $hashedPassword);
         $stmt->bindValue(':city', $request->city);
-
         $stmt->execute();
 
-//        $userId = $pdo->lastInsertId();
-//
-//        // JWT Token (ساده)
-//        $payload = [
-//            'sub' => $userId,
-//            'phone' => $request->phoneNumber,
-//            'iat' => time(),
-//            'exp' => time() + (60 * 60 * 24)
-//        ];
-//        $token = JWT::encode($payload, env('JWT_SECRET'), 'HS256');
+        $userId = $pdo->lastInsertId();
+
+        $getUserStmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+        $getUserStmt->execute([$userId]);
+        $userData = $getUserStmt->fetch(PDO::FETCH_ASSOC);
+
+        $user = new User();
+        foreach ($userData as $key => $value) {
+            $user->$key = $value;
+        }
+
+
+        $token = JWTAuth::fromUser($user);
 
         return response()->json([
             'message' => 'User created successfully',
-//            'token' => $token
+            'token' => $token
         ], 201);
     }
+
 
     public function signIn(Request $request){
         $request->validate([

@@ -143,6 +143,10 @@
       <path value="$PROJECT_DIR$/example-app/vendor/webmozart/assert" />
       <path value="$PROJECT_DIR$/example-app/vendor/voku/portable-ascii" />
       <path value="$PROJECT_DIR$/example-app/vendor/predis/predis" />
+      <path value="$PROJECT_DIR$/example-app/vendor/tymon/jwt-auth" />
+      <path value="$PROJECT_DIR$/example-app/vendor/lcobucci/jwt" />
+      <path value="$PROJECT_DIR$/example-app/vendor/lcobucci/clock" />
+      <path value="$PROJECT_DIR$/example-app/vendor/stella-maris/clock" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />

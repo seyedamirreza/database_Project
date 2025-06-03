@@ -27,7 +27,7 @@ class BaleChannel
         });
 
         // ذخیره OTP در Redis با کلید شماره موبایل و زمان انقضا 20 دقیقه
-        Redis::setex((string)$notifiable->phoneNumber, 1200, $data['otp']);
+        Redis::setex((string)$notifiable->phoneNumber, 120, $data['otp']);
 
         // ارسال OTP به API Bale
         Http::withHeaders([

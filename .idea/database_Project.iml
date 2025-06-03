@@ -132,6 +132,10 @@
       <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/voku/portable-ascii" />
       <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/webmozart/assert" />
       <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/predis/predis" />
+      <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/lcobucci/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/stella-maris/clock" />
+      <excludeFolder url="file://$MODULE_DIR$/example-app/vendor/tymon/jwt-auth" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
