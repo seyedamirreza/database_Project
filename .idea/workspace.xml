@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="add jwt to login user">
+    <list default="true" id="218c02ac-ebde-47f7-984f-046880544571" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/example-app/database/sqlFile/sqlTables.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" beforeDir="false" afterPath="$PROJECT_DIR$/example-app/app/Http/Controllers/TicketController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,9 +197,6 @@
       <option name="pestRunnerSettings">
         <PestRunner configuration_file="$PROJECT_DIR$/example-app/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
       </option>
-      <option name="runnerSettings">
-        <PhpTestRunnerSettings configuration_file="$PROJECT_DIR$/example-app/phpunit.xml" scope="ConfigurationFile" use_alternative_configuration_file="true" />
-      </option>
       <method v="2" />
     </configuration>
   </component>
@@ -225,7 +222,11 @@
       <workItem from="1748512258424" duration="8813000" />
       <workItem from="1748691206990" duration="12858000" />
       <workItem from="1748865206753" duration="5958000" />
-      <workItem from="1748951467821" duration="5810000" />
+      <workItem from="1748951467821" duration="5902000" />
+      <workItem from="1748963748827" duration="161000" />
+      <workItem from="1749049439085" duration="584000" />
+      <workItem from="1749289673071" duration="5000" />
+      <workItem from="1749751523907" duration="624000" />
     </task>
     <task id="LOCAL-00001" summary="test first api for insert user in database">
       <option name="closed" value="true" />
@@ -363,7 +364,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748955592586</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="redis add to search ticket">
+      <option name="closed" value="true" />
+      <created>1748957541142</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1748957541142</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -387,6 +396,7 @@
     <MESSAGE value="Add redis to notification channel" />
     <MESSAGE value="api 10(show cancelled ticket ) is ready" />
     <MESSAGE value="add jwt to login user" />
-    <option name="LAST_COMMIT_MESSAGE" value="add jwt to login user" />
+    <MESSAGE value="redis add to search ticket" />
+    <option name="LAST_COMMIT_MESSAGE" value="redis add to search ticket" />
   </component>
 </project>
